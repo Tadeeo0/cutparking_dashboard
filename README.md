@@ -36,11 +36,11 @@ pip install -r requirements.txt
    
 Crea un archivo .env en la raíz del proyecto con las siguientes variables:
 
--DB_USER=your_username
--DB_PASSWORD=your_password
--DB_HOST=localhost
--DB_PORT=3307
--DB_NAME=parking_dashboard
+- DB_USER=your_username
+- DB_PASSWORD=your_password
+- DB_HOST=localhost
+- DB_PORT=3307
+- DB_NAME=parking_dashboard
 
 9. Ejecutar la aplicación
     
