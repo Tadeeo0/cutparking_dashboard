@@ -27,19 +27,25 @@ En Windows: venv\Scripts\activate
 En MacOS: source venv/bin/activate
 
 5. Instalar las dependencias
+   
 Una vez que tengas el entorno virtual activado, instala las dependencias del proyecto con:
+
 pip install -r requirements.txt
 
-6. Configurar las variables de entorno
+7. Configurar las variables de entorno
+   
 Crea un archivo .env en la raíz del proyecto con las siguientes variables:
-DB_USER=your_username
-DB_PASSWORD=your_password
-DB_HOST=localhost
-DB_PORT=3307
-DB_NAME=parking_dashboard
 
-7. Ejecutar la aplicación
+-DB_USER=your_username
+-DB_PASSWORD=your_password
+-DB_HOST=localhost
+-DB_PORT=3307
+-DB_NAME=parking_dashboard
+
+9. Ejecutar la aplicación
+    
 Finalmente, puedes ejecutar la aplicación de Flask con:
+
 python run.py
 
 
