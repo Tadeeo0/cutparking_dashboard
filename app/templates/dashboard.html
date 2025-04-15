@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block title %}Panel Administrativo - Estacionamiento{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="text-center mb-4">Bienvenido, {{ user.username }}</h2>
+
+    <!-- Estadísticas de Estacionamiento -->
+    <div class="row">
+        <div class="col-md-4 mb-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Estadísticas de Estacionamiento</h5>
+                    <ul>
+                        <li>Total de espacios: 100</li>
+                        <li>Espacios ocupados: 60</li>
+                        <li>Espacios libres: 40</li>
+                    </ul>
+                    
+                    <a href="#" class="btn btn-primary">Ver más detalles</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Administración de Reservas -->
+        <div class="col-md-4 mb-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Administración de Reservas</h5>
+                    <p>Gestiona las reservas de los usuarios, puedes ver los detalles de las reservas, modificarlas o cancelarlas.</p>
+                    
+                    <a href="#" class="btn btn-primary">Ver Reservas</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Usuarios Registrados -->
+        <div class="col-md-4 mb-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Usuarios Registrados</h5>
+                    <p>Administra los usuarios del sistema y administradores del sistema.</p>
+                    
+                    <a href="{{ url_for('main.register') }}" class="btn btn-primary">Registrar nuevo administrador</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Acciones rápidas -->
+    <div class="row mt-5">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Acciones rápidas</h5>
+                    <ul>
+                        
+                        <li><a href="#" class="btn btn-link">Añadir espacio de estacionamiento</a></li>
+                        <li><a href="#" class="btn btn-link">Ver reporte de tráfico</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
