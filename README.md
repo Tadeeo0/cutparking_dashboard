@@ -13,6 +13,7 @@ Este es un proyecto web desarrollado con Flask para la gestión de estacionamien
 ### 1. Clonar el repositorio
 
 git clone https://github.com/Tadeeo0/cutparking_dashboard.git
+
 cd cutparking_dashboard
 
 2. Crear un entorno virtual
