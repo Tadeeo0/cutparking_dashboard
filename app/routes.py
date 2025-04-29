@@ -17,7 +17,7 @@ def login():
        
         user = User.query.filter_by(email=form.email.data).first()
         if user:
-            # Verifica si el usuario está activo
+            
             if user.is_active:
                 if user.check_password(form.password.data):
                     login_user(user)
