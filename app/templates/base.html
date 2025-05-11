@@ -18,7 +18,7 @@
 
     <!-- Estilos personalizados para header y footer -->
     <style>
-      /* Header modernizado */
+     
       .navbar {
         background: linear-gradient(45deg, #212121, #121212);
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.8);
@@ -38,7 +38,7 @@
       .navbar-nav .nav-link:hover {
         color: #00bcd4 !important;
       }
-      /* Animación al hacer scroll: opcional, para darle dinamismo */
+     
       .navbar.scrolled {
         background: #121212;
         box-shadow: 0 6px 12px rgba(0,0,0,0.9);
@@ -60,7 +60,7 @@
         to { opacity: 1; transform: translateY(0); }
       }
 
-      /* Animación sutil para el header al cargar */
+  
       @keyframes headerFadeIn {
         from { opacity: 0; transform: translateY(-20px); }
         to { opacity: 1; transform: translateY(0); }
@@ -139,7 +139,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <!-- OpenLayers UMD bundle JS (versión fija 10.5.0) -->
     <script src="https://cdn.jsdelivr.net/npm/ol@v10.5.0/dist/ol.js"></script>
-    <!-- Page-specific scripts -->
+   
     {% block scripts %}{% endblock %}
 
 
