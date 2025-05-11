@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block title %}Ver Espacios de Estacionamiento{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+  <h2 class="text-center mb-4" style="color: #00bcd4;">Lista de Espacios de Estacionamiento</h2>
+
+  <a href="{{ url_for('main.add_spot') }}" class="btn btn-success mb-3" style="font-weight: bold;">Agregar Nuevo Espacio</a>
+
+  <table class="table table-striped table-dark">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Estado</th>
+        <th>Ubicación (Lat/Lng)</th>
+        <th>Sección</th>
+        <th>Fecha de Creación</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for spot in spots %}
+      <tr>
+        <td>{{ spot.spot_id }}</td>
+        <td>{{ spot.status|string }}</td>
+        <td>
+          <a href="#"
+             onclick="showMap({{ spot.lat|float }}, {{ spot.lng|float }}); return false;"
+             title="Ver ubicación en el mapa"
+             style="text-decoration: underline; color: #03a9f4;">
+            {{ spot.lat }}, {{ spot.lng }}
+          </a>
+        </td>
+        <td>{{ spot.section }}</td>
+        <td>{{ spot.created_at }}</td>
+        <td>
+          <a href="{{ url_for('main.delete_spot', spot_id=spot.spot_id) }}"
+             class="btn btn-danger btn-sm"
+             onclick="return confirm('¿Estás seguro de eliminar este espacio?')">
+            Eliminar
+          </a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <a href="{{ url_for('main.dashboard') }}" class="btn btn-secondary mt-3" style="background-color: #444; border: none;">Volver al Dashboard</a>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="mapModal" tabindex="-1" aria-labelledby="mapModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content bg-dark text-white">
+      <div class="modal-header border-secondary">
+        <h5 class="modal-title" id="mapModalLabel">Ubicación en el Mapa</h5>
+        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Cerrar">
+            <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body p-0">
+        <div id="map" style="width: 100%; height: 400px;"></div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+  {{ super() }}
+  <script src="{{ url_for('static', filename='js/map.js') }}"></script>
+{% endblock %}

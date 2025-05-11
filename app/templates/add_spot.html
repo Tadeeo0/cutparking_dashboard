@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}Agregar Espacio de Estacionamiento{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="text-center mb-4">Agregar Nuevo Espacio de Estacionamiento</h2>
+
+    <form method="POST">
+        <div class="form-group">
+            <label for="status">Estado:</label>
+            <select class="form-control" id="status" name="status" required>
+                <option value="available">AVAILABLE</option>
+                <option value="reserved">RESERVED</option>
+                <option value="occupied">OCCUPIED</option>
+            </select>
+        </div>
+    
+        <div class="form-group">
+            <label for="latitude">Latitud:</label>
+            <input type="text" class="form-control" id="latitude" name="latitude" placeholder="Ejemplo: 78.09" required>
+        </div>
+        <div class="form-group">
+            <label for="longitude">Longitud:</label>
+            <input type="text" class="form-control" id="longitude" name="longitude" placeholder="Ejemplo: 70.75" required>
+        </div>
+
+        <div class="form-group">
+            <label for="section">Sección:</label>
+            <input type="text" class="form-control" id="section" name="section" placeholder="Ingresa la sección">
+        </div>
+    
+    
+        <input type="hidden" id="location" name="location">
+    
+        <button type="submit" class="btn btn-primary">Agregar Espacio</button>
+    </form>
+    
+    
+    <a href="{{ url_for('main.view_spots') }}" class="btn btn-secondary mt-3">Volver a los Espacios</a>
+</div>
+{% endblock %}

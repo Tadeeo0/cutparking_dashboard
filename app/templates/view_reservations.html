@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}Ver Reservas{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="text-center mb-4" style="color: #00bcd4;">Lista de Reservas</h2>
+
+    <table class="table table-striped table-dark">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Usuario</th>
+                <th>Espacio de Estacionamiento</th>
+                <th>Hora de Inicio</th>
+                <th>Hora de Fin</th>
+                <th>Estado</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for reservation in reservations %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ reservation.user_id }}</td>
+                <td>{{ reservation.spot_id }}</td>
+                <td>{{ reservation.start_time }}</td>
+                <td>{{ reservation.end_time }}</td>
+                <td>{{ reservation.status }}</td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="6" class="text-center">No hay reservas disponibles.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ url_for('main.dashboard') }}" class="btn btn-secondary mt-3" style="background-color: #444; border: none;">Volver al Dashboard</a>
+    <hr>
+</div>
+{% endblock %}

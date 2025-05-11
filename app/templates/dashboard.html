@@ -4,45 +4,52 @@
 
 {% block content %}
 <div class="container mt-4">
-    <h2 class="text-center mb-4">Bienvenido, {{ user.username }}</h2>
+    <h2 class="text-center mb-4" style="color: #00bcd4;">Bienvenido, {{ current_user.email }}</h2>
 
     <!-- Estadísticas de Estacionamiento -->
     <div class="row">
         <div class="col-md-4 mb-3">
-            <div class="card">
+            <div class="card shadow-lg" style="background-color: #2c2c2c; border: none;">
                 <div class="card-body">
-                    <h5 class="card-title">Estadísticas de Estacionamiento</h5>
-                    <ul>
-                        <li>Total de espacios: 100</li>
-                        <li>Espacios ocupados: 60</li>
-                        <li>Espacios libres: 40</li>
+                    <h5 class="card-title" style="color: #ffffff;">Estadísticas de Estacionamiento</h5>
+                    <ul style="color: #e0e0e0;">
+                        <li>Total de Usuarios: {{ total_users }}</li>
+                        <li>Total de Autos: {{ total_cars }}</li>
                     </ul>
                     
-                    <a href="#" class="btn btn-primary">Ver más detalles</a>
+                    <a href="{{ url_for('main.users') }}" class="btn btn-primary" style="background-color: #00bcd4; border: none;">Ver Usuarios</a>
                 </div>
             </div>
         </div>
 
         <!-- Administración de Reservas -->
         <div class="col-md-4 mb-3">
-            <div class="card">
+            <div class="card shadow-lg" style="background-color: #2c2c2c; border: none;">
                 <div class="card-body">
-                    <h5 class="card-title">Administración de Reservas</h5>
-                    <p>Gestiona las reservas de los usuarios, puedes ver los detalles de las reservas, modificarlas o cancelarlas.</p>
+                    <h5 class="card-title" style="color: #ffffff;">Administración de Reservas</h5>
+                    <p style="color: #e0e0e0;">Gestiona las reservas de los usuarios, puedes ver los detalles de las reservas, modificarlas o cancelarlas.</p>
+                    <ul style="color: #e0e0e0;">
+                        <li>Total de Espacios: {{ total_spots }}</li>
+                        <li>Espacios Disponibles: {{ total_spots_available }}</li>
+                        <li>Espacios Reservados: {{ total_spots_reserved }}</li>
+                        <li>Espacios Ocupados: {{ total_spots_ccupied }}</li>
+                    </ul>
                     
-                    <a href="#" class="btn btn-primary">Ver Reservas</a>
+                    <a href="{{ url_for('main.view_reservations') }}" class="btn btn-primary" style="background-color: #00bcd4; border: none;">Ver Reservas</a>
+                    <a href="{{ url_for('main.view_spots') }}" class="btn btn-secondary ml-2" style="background-color: #444; border: none;">Ver Espacios</a>
+
                 </div>
             </div>
         </div>
 
         <!-- Usuarios Registrados -->
         <div class="col-md-4 mb-3">
-            <div class="card">
+            <div class="card shadow-lg" style="background-color: #2c2c2c; border: none;">
                 <div class="card-body">
-                    <h5 class="card-title">Usuarios Registrados</h5>
-                    <p>Administra los usuarios del sistema y administradores del sistema.</p>
+                    <h5 class="card-title" style="color: #ffffff;">Usuarios Registrados</h5>
+                    <p style="color: #e0e0e0;">Administra los usuarios del sistema y administradores del sistema.</p>
                     
-                    <a href="{{ url_for('main.register') }}" class="btn btn-primary">Registrar nuevo administrador</a>
+                    <a href="{{ url_for('main.register') }}" class="btn btn-primary" style="background-color: #00bcd4; border: none;">Registrar nuevo administrador</a>
                 </div>
             </div>
         </div>
@@ -51,13 +58,11 @@
     <!-- Acciones rápidas -->
     <div class="row mt-5">
         <div class="col-md-12">
-            <div class="card">
+            <div class="card shadow-lg" style="background-color: #2c2c2c; border: none;">
                 <div class="card-body">
-                    <h5 class="card-title">Acciones rápidas</h5>
-                    <ul>
-                        
-                        <li><a href="#" class="btn btn-link">Añadir espacio de estacionamiento</a></li>
-                        <li><a href="#" class="btn btn-link">Ver reporte de tráfico</a></li>
+                    <h5 class="card-title" style="color: #ffffff;">Acciones rápidas</h5>
+                    <ul style="color: #e0e0e0;">
+                        <li><a href="{{ url_for('main.add_spot') }}" class="btn btn-link" style="color: #00bcd4;">Añadir espacio de estacionamiento</a></li>
                     </ul>
                 </div>
             </div>

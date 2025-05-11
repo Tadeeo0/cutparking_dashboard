@@ -1,64 +1,147 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>{% block title %}Dashboard{% endblock %}</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body>
-    <!-- Barra de navegación -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container">
-            <a class="navbar-brand" href="#">Parking Dashboard</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ml-auto">
-                    {% if current_user.is_authenticated %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for('main.logout') }}">Cerrar sesión</a>
-                        </li>
-                    {% endif %}
-                </ul>
-            </div>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Bootstrap 4 CSS -->
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='CSS/map.css') }}">
+
+    <!-- OpenLayers CSS (versión fija 10.5.0) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@v10.5.0/ol.css">
+
+    <!-- Estilos personalizados para header y footer -->
+    <style>
+      /* Header modernizado */
+      .navbar {
+        background: linear-gradient(45deg, #212121, #121212);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.8);
+        transition: background 0.4s ease-in-out;
+      }
+      .navbar-brand {
+        font-size: 1.8rem;
+        font-weight: bold;
+        letter-spacing: 0.05rem;
+        color: #00bcd4 !important;
+      }
+      .navbar-nav .nav-link {
+        font-size: 1.1rem;
+        margin-left: 1rem;
+        transition: color 0.3s ease;
+      }
+      .navbar-nav .nav-link:hover {
+        color: #00bcd4 !important;
+      }
+      /* Animación al hacer scroll: opcional, para darle dinamismo */
+      .navbar.scrolled {
+        background: #121212;
+        box-shadow: 0 6px 12px rgba(0,0,0,0.9);
+      }
+
+      /* Footer modernizado */
+      footer {
+        background: linear-gradient(45deg, #121212, #212121);
+        color: #aaa;
+        border-top: 1px solid #333;
+        padding: 1.5rem 0;
+        font-size: 0.95rem;
+        box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.8);
+        opacity: 0;
+        animation: footerFadeIn 1s ease forwards 0.5s;
+      }
+      @keyframes footerFadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+
+      /* Animación sutil para el header al cargar */
+      @keyframes headerFadeIn {
+        from { opacity: 0; transform: translateY(-20px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      .navbar {
+        animation: headerFadeIn 1s ease-out;
+      }
+    </style>
+  </head>
+  <body class="bg-dark text-light">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="#">CUTParking Dashboard</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Alternar navegación"
+          title="Menú"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ml-auto">
+            {% if current_user.is_authenticated %}
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('main.logout') }}">
+                  Cerrar sesión
+                </a>
+              </li>
+            {% endif %}
+          </ul>
         </div>
+      </div>
     </nav>
 
-    <!-- Mensajes -->
+    <!-- Espacio extra para evitar que el contenido quede tapado por el header fijo -->
+    <div style="height:70px;"></div>
+
+    <!-- Flash messages -->
     <div class="container mt-4">
-        {% with messages = get_flashed_messages() %}
-            {% if messages %}
-                <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                    <ul class="mb-0">
-                        {% for msg in messages %}
-                            <li>{{ msg }}</li>
-                        {% endfor %}
-                    </ul>
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-            {% endif %}
-        {% endwith %}
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <ul class="mb-0">
+              {% for msg in messages %}
+                <li>{{ msg }}</li>
+              {% endfor %}
+            </ul>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Cerrar">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        {% endif %}
+      {% endwith %}
     </div>
 
-    <!-- Contenido principal -->
+    <!-- Main content -->
     <main class="container mt-4">
-        {% block content %}{% endblock %}
+      {% block content %}{% endblock %}
     </main>
 
-    <!-- Pie de página -->
-    <footer class="bg-dark text-white text-center py-4 mt-5">
-        
+    <!-- Footer -->
+    <footer class="text-center">
+      <div class="container">
+        <p>&copy; 2025 CUTParking Dashboard. Todos los derechos reservados.</p>
+      </div>
     </footer>
 
-    
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <!-- Scripts: jQuery, Popper, Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</body>
+    <!-- OpenLayers UMD bundle JS (versión fija 10.5.0) -->
+    <script src="https://cdn.jsdelivr.net/npm/ol@v10.5.0/dist/ol.js"></script>
+    <!-- Page-specific scripts -->
+    {% block scripts %}{% endblock %}
+
+
+  </body>
 </html>

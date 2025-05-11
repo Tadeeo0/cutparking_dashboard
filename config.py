@@ -20,7 +20,7 @@ class Config:
 
 
 class DevelopmentConfig(Config):
-    DEBUG = os.getenv('DEBUG', 'True') == 'True'
+    DEBUG = True
     FLASK_ENV = 'development'
 
 
